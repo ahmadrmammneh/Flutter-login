@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myapploginandsignup/pages/home-page.dart';
-import 'package:myapploginandsignup/pages/signup-page.dart';
-import 'package:myapploginandsignup/pages/login-page.dart';
+import 'package:myapploginandsignup/pages/drawer/driverdrawer/accountpage.dart';
+import 'package:myapploginandsignup/pages/drawer/vendordrawer/accountpage.dart';
+import 'package:myapploginandsignup/pages/postlogin/driverhome.dart';
+import 'package:myapploginandsignup/pages/postlogin/vendorhome.dart';
+import 'package:myapploginandsignup/pages/prelogin/Signup_Vendor_Page.dart';
+import 'package:myapploginandsignup/pages/prelogin/home-page.dart';
+import 'package:myapploginandsignup/pages/prelogin/Signup_Driver_Page.dart';
+import 'package:myapploginandsignup/pages/prelogin/login-page.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +22,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomePage(),
         '/login': (context) => LoginPage(),
-        '/signup': (context) => SignupPage(),
+        '/signup-driver': (context) => SignupDriverPage(),
+        //'/signup-vendor': (context) => SignupVendorPage(),
+        '/signup-vendor': (context) => VendorHome(),
+        '/account-vendor': (context) => Accountvendorpage(),
+        //'/signup-driver': (context) => Driverhome(),
+        '/account-driver': (context) => Accountdriverpage(),
       },
     );
   }

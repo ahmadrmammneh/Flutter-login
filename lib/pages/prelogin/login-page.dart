@@ -11,12 +11,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (dontHaveAccount) {
-      Future.microtask(() {
-        Navigator.pushNamed(context, '/signup');
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -27,30 +21,22 @@ class _LoginPageState extends State<LoginPage> {
         ),
         title: Text("Login"),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 63, 97, 109),
+        backgroundColor: Color.fromARGB(255, 24, 112, 98),
       ),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: MediaQuery.sizeOf(context).width,
+        height: MediaQuery.sizeOf(context).height,
         padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF0F2027), Color(0xFF203A43), Color(0xFF2C5364)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        decoration: BoxDecoration(color: Color(0xff3B6C64)),
         child: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(
-                  "https://thumbs.dreamstime.com/b/mobile-app-features-talking-head-ai-avatar-interactive-educational-session-engages-users-providing-content-357664846.jpg",
-                ),
+                backgroundImage: AssetImage("assets/png/8801434.png"),
               ),
-              SizedBox(width: double.infinity, height: 120),
+              SizedBox(height: 120),
               TextField(
                 decoration: InputDecoration(
                   hint: Text(
@@ -73,9 +59,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
               SizedBox(height: 16),
               TextField(
+                obscureText: isSecured,
                 decoration: InputDecoration(
                   hint: Text(
                     "please enter your password",
@@ -115,17 +101,79 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         dontHaveAccount = value ?? false;
                       });
+
+                      if (value == true) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Select Account Type'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/signup-driver',
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.directions_car,
+                                      color: Colors.white,
+                                    ),
+                                    label: Text(
+                                      'Driver',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Color(0xff3B6C64),
+                                    ),
+                                  ),
+                                  SizedBox(height: 12),
+                                  ElevatedButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/signup-vendor',
+                                      );
+                                    },
+                                    icon: Icon(
+                                      Icons.store,
+                                      color: Colors.white,
+                                    ),
+                                    label: Text(
+                                      'Vendor',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Color(0xff3B6C64),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                   Expanded(
                     child: Text(
-                      "dont have account go to signe up page",
+                      "Don't have account? Go to signup page",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
               ),
-              ElevatedButton(onPressed: () {}, child: Text("Login")),
+              ElevatedButton(
+                onPressed: () {
+                  // تنفيذ عملية تسجيل الدخول هنا
+                },
+                child: Text("Login"),
+              ),
             ],
           ),
         ),

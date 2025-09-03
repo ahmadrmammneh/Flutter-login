@@ -46,6 +46,21 @@ class ValidationsMetod {
     return null;
   }
 
+  static String? validateNationalId(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your National Id';
+    }
+    if (value.length != 10) {
+      return 'National Id must be 10 digits';
+    }
+
+    final nationalRegex = RegExp(RegExption.onlyNumber);
+    if (!nationalRegex.hasMatch(value)) {
+      return 'Please enter a valid National Id';
+    }
+    return null;
+  }
+
   static String? validateName(String? value) {
     // check if the name only space
     if (value == null || value.trim().isEmpty) {
